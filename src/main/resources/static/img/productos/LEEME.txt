@@ -1,0 +1,18 @@
+CÓMO AGREGAR FOTOS DE LOS PRODUCTOS
+=====================================
+
+1. Consigue una foto (JPG o PNG) de cada producto. Ideal: cuadrada o
+   rectangular, no muy pesada (menos de 500 KB cada una para que la
+   página cargue rápido).
+
+2. Ponle a cada foto EXACTAMENTE este nombre y guárdala en esta misma
+   carpeta (public/img/productos/):
+
+   hamburguesa.jpg   -> Hamburguesa Clásica
+   pizza.jpg          -> Pizza Pepperoni
+   salchipapa.jpg      -> Salchipapa
+   perro.jpg           -> Perro Caliente
+   alitas.jpg          -> Alitas BBQ
+   gaseosa.jpg         -> Gaseosa 400ml
+   limonada.jpg        -> Limonada Natural
+   brownie.jpg         -> Brownie con Helado

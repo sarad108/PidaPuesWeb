@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PidaPues | Pide rápido, fácil y sin errores</title>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <meta name="description" content="Pide desde tu mesa, paga seguro y sigue tu pedido en vivo. Reserva por WhatsApp y mira lo que dicen nuestros clientes." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+
+  <!-- barra de arriba -->
+  <header class="barra">
+    <a href="index.html" class="barra-icono" aria-label="PidaPues, inicio">
+      <img src="img/favicon.png" alt="" width="40" height="40" />
+    </a>
+    <nav class="barra-nav" aria-label="Secciones">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#favoritos">Favoritos</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#resenas">Reseñas</a>
+      <a href="#contacto">Contacto</a>
+      <button type="button" class="barra-cta" data-ir-menu>Ver menú</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- banner (el único de la página) -->
+    <section class="banner" aria-label="PidaPues">
+      <h1 class="solo-lectores">PidaPues: pide rápido, fácil y sin errores</h1>
+      <picture>
+        <source media="(max-width: 700px)" srcset="img/banner-movil.jpg" width="830" height="489" />
+        <img src="img/banner.jpg" width="1600" height="489"
+             alt="PidaPues, pide rápido, fácil y sin errores. Una hamburguesa y una pizza acompañan el logo con plato y cubiertos." />
+      </picture>
+    </section>
+
+    <!-- botones -->
+    <section class="accion" aria-label="Qué quieres hacer">
+      <p class="accion-texto">Elige tus platos desde la mesa, paga seguro y sigue tu pedido en vivo.</p>
+      <div class="accion-botones">
+        <button type="button" class="btn-principal" data-ir-menu>
+          <span>Ver menú</span>
+          <svg class="btn-flecha" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <a href="#resenas" class="btn-secundario">Ver reseñas</a>
+      </div>
+      <div class="accion-prueba" id="heroPrueba" hidden>
+        <span class="estrellas" id="heroEstrellas" aria-hidden="true"></span>
+        <span><b id="heroNota">—</b> · <span id="heroTotal">0 reseñas</span></span>
+      </div>
+    </section>
+
+    <!-- cómo funciona -->
+    <section class="seccion seccion-clara" id="como-funciona" aria-labelledby="tituloPasos">
+      <div class="contenedor">
+        <p class="seccion-eyebrow">Cómo funciona</p>
+        <h2 class="seccion-titulo" id="tituloPasos">Del celular a tu mesa en 4 pasos</h2>
+        <ol class="pasos">
+          <li class="paso">
+            <span class="paso-numero" aria-hidden="true">1</span>
+            <span class="paso-icono" aria-hidden="true">📱</span>
+            <h3>Elige tus platos</h3>
+            <p>Mira el menú desde la mesa, arma tu pedido y deja tus observaciones.</p>
+          </li>
+          <li class="paso">
+            <span class="paso-numero" aria-hidden="true">2</span>
+            <span class="paso-icono" aria-hidden="true">💳</span>
+            <h3>Paga seguro</h3>
+            <p>Con tarjeta, QR o efectivo. Verificas con un código y recibes tu factura.</p>
+          </li>
+          <li class="paso">
+            <span class="paso-numero" aria-hidden="true">3</span>
+            <span class="paso-icono" aria-hidden="true">👨‍🍳</span>
+            <h3>Cocina lo prepara</h3>
+            <p>Apenas se confirma el pago, tu pedido llega directo a la cocina.</p>
+          </li>
+          <li class="paso">
+            <span class="paso-numero" aria-hidden="true">4</span>
+            <span class="paso-icono" aria-hidden="true">🍽️</span>
+            <h3>Lo recibes en tu mesa</h3>
+            <p>Sigues el estado en vivo y el mesero te lo lleva calientico.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- platos favoritos (salen del menú de la base de datos) -->
+    <section class="seccion" id="favoritos" aria-labelledby="tituloFavoritos">
+      <div class="contenedor">
+        <p class="seccion-eyebrow">Del menú</p>
+        <h2 class="seccion-titulo" id="tituloFavoritos">Nuestros favoritos</h2>
+        <div class="favoritos-grid" id="favoritosGrid" aria-live="polite">
+          <article class="favorito favorito-esqueleto"></article>
+          <article class="favorito favorito-esqueleto"></article>
+          <article class="favorito favorito-esqueleto"></article>
+          <article class="favorito favorito-esqueleto"></article>
+        </div>
+        <div class="centrado">
+          <button type="button" class="btn-secundario" data-ir-menu>Ver el menú completo</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- nosotros -->
+    <section class="seccion seccion-clara" id="nosotros" aria-labelledby="tituloNosotros">
+      <div class="contenedor nosotros">
+        <div class="nosotros-visual" aria-hidden="true">
+          <span class="nv-circulo nv-1"></span><span class="nv-circulo nv-2"></span>
+          <span class="nv-plato nv-a">🍔</span>
+          <span class="nv-plato nv-b">🍕</span>
+          <span class="nv-plato nv-c">🍟</span>
+          <span class="nv-plato nv-d">🥤</span>
+        </div>
+        <div class="nosotros-texto">
+          <p class="seccion-eyebrow">Nosotros</p>
+          <h2 class="seccion-titulo" id="tituloNosotros">Comida rica, sin esperas ni enredos</h2>
+          <p>En PidaPues creemos que pedir tiene que ser tan sencillo como disfrutar la comida. Por eso cada mesa tiene su pedido en línea: tú eliges, pagas y sigues el estado sin levantar la mano.</p>
+          <p>Nuestra cocina prepara cada pedido apenas se confirma el pago y el equipo de sala te lo lleva a la mesa. Menos errores, menos filas y más tiempo para lo que importa: comer con quien quieres.</p>
+          <ul class="nosotros-lista">
+            <li>✔ Pedidos sin errores</li>
+            <li>✔ Pago verificado y factura al instante</li>
+            <li>✔ Seguimiento en vivo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- reseñas -->
+    <section class="resenas" id="resenas" aria-labelledby="resenasTitulo">
+      <div class="resenas-cabecera">
+        <p class="seccion-eyebrow">Reseñas</p>
+        <h2 class="seccion-titulo" id="resenasTitulo">Lo que dicen quienes ya pidieron</h2>
+        <div class="resenas-resumen" id="resenasResumen" hidden>
+          <span class="resumen-nota" id="resumenNota">—</span>
+          <span class="estrellas estrellas-grandes" id="resumenEstrellas" aria-hidden="true"></span>
+          <span class="resumen-total" id="resumenTotal"></span>
+        </div>
+      </div>
+      <div class="resenas-grid" id="resenasGrid" aria-live="polite">
+        <article class="resena-card resena-esqueleto"></article>
+        <article class="resena-card resena-esqueleto"></article>
+        <article class="resena-card resena-esqueleto"></article>
+      </div>
+      <p class="resenas-nota">Las reseñas las dejan los clientes al ver su factura, después de pagar.</p>
+    </section>
+
+    <!-- reservas y contacto -->
+    <section class="seccion seccion-clara" id="contacto" aria-labelledby="tituloContacto">
+      <div class="contenedor">
+        <p class="seccion-eyebrow">Reservas y contacto</p>
+        <h2 class="seccion-titulo" id="tituloContacto">Escríbenos, te atendemos</h2>
+
+        <div class="contacto">
+          <!-- datos del restaurante -->
+          <aside class="contacto-info">
+            <h3>Visítanos</h3>
+            <ul class="contacto-lista">
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                <span id="cDireccion">Medellín, Antioquia</span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                <span id="cHorario"></span></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+                <a id="cTelefono" href="#"></a></li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                <a id="cCorreo" href="#"></a></li>
+            </ul>
+
+            <a class="btn-whatsapp" id="btnWhatsapp" href="#" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path class="wa-tel" d="M9.2 8.2c.3 2.6 2.9 5.2 5.6 5.600l1.200-1.200-2-1-.9.9c-.9-.4-1.700-1.200-2.100-2.100l.9-.9-1-2z"/></svg>
+              Reservar por WhatsApp
+            </a>
+
+            <div class="redes" aria-label="Redes sociales">
+              <a href="#" id="redInstagram" aria-label="Instagram de PidaPues" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r="0.6"/></svg></a>
+              <a href="#" id="redFacebook" aria-label="Facebook de PidaPues" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h2.5V5H14a3.500 3.500 0 0 0-3.500 3.500V10H8v3h2.500v6h3v-6H16l.5-3h-3V8.700c0-.4.200-.700.800-.700z"/></svg></a>
+              <a href="#" id="redTiktok" aria-label="TikTok de PidaPues" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4v10.500a3.500 3.500 0 1 1-3.500-3.500"/><path d="M14 4c.3 2.200 1.700 3.700 4 4"/></svg></a>
+            </div>
+          </aside>
+
+          <!-- formulario de contacto (solo simulación, no envía nada) -->
+          <div class="contacto-formulario">
+            <form id="formContacto" novalidate>
+              <h3>Escríbenos un mensaje</h3>
+              <div class="campo-fila">
+                <div class="campo">
+                  <label for="cNombre">Nombre</label>
+                  <input id="cNombre" name="nombre" type="text" maxlength="40" autocomplete="name" placeholder="Tu nombre" />
+                  <small class="campo-error" data-error="nombre"></small>
+                </div>
+                <div class="campo">
+                  <label for="cCel">Celular</label>
+                  <input id="cCel" name="celular" type="tel" inputmode="numeric" maxlength="15" autocomplete="tel" placeholder="300 000 0000" />
+                  <small class="campo-error" data-error="celular"></small>
+                </div>
+              </div>
+              <div class="campo">
+                <label for="cMotivo">¿Qué necesitas?</label>
+                <select id="cMotivo" name="motivo">
+                  <option value="Reserva">Reservar una mesa</option>
+                  <option value="Consulta">Hacer una consulta</option>
+                  <option value="Evento">Cotizar un evento</option>
+                  <option value="Sugerencia">Dejar una sugerencia</option>
+                </select>
+              </div>
+              <div class="campo-fila" id="camposReserva">
+                <div class="campo">
+                  <label for="cFecha">Fecha</label>
+                  <input id="cFecha" name="fecha" type="date" />
+                  <small class="campo-error" data-error="fecha"></small>
+                </div>
+                <div class="campo">
+                  <label for="cPersonas">Personas</label>
+                  <input id="cPersonas" name="personas" type="number" min="1" max="20" value="2" />
+                  <small class="campo-error" data-error="personas"></small>
+                </div>
+              </div>
+              <div class="campo">
+                <label for="cMensaje">Mensaje (opcional)</label>
+                <textarea id="cMensaje" name="mensaje" rows="3" maxlength="300" placeholder="Cuéntanos lo que necesitas"></textarea>
+              </div>
+              <button type="submit" class="btn-principal btn-enviar">Enviar mensaje</button>
+              <p class="aviso-demo">Demostración: este formulario es solo visual y no envía datos.</p>
+            </form>
+
+            <div class="contacto-exito" id="contactoExito" role="status" hidden>
+              <span class="exito-icono" aria-hidden="true">✅</span>
+              <h3>¡Gracias, <span id="exitoNombre"></span>!</h3>
+              <p id="exitoResumen"></p>
+              <div class="exito-botones">
+                <a class="btn-whatsapp" id="btnWhatsappExito" href="#" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+                <button type="button" class="btn-secundario" id="btnOtroMensaje">Enviar otro mensaje</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- parte final -->
+    <section class="cta-final" aria-label="Hacer un pedido">
+      <div class="cta-panel">
+        <span class="cta-deco cta-deco-1" aria-hidden="true">🍔</span>
+        <span class="cta-deco cta-deco-2" aria-hidden="true">🍕</span>
+        <h2>¿Listo para pedir?</h2>
+        <p>Elige tus platos, paga seguro y recíbelos en tu mesa.</p>
+        <button type="button" class="btn-amarillo" data-ir-menu>Ver menú</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- pie de página -->
+  <footer class="pie">
+    <div class="pie-contenido">
+      <div class="pie-marca">
+        <p class="pie-nombre">Pida<b>Pues</b></p>
+        <p>Pide rápido, fácil y sin errores.</p>
+      </div>
+      <nav class="pie-enlaces" aria-label="Enlaces del pie">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#favoritos">Favoritos</a>
+        <a href="#resenas">Reseñas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="pie-datos">
+        <p id="pDireccion"></p>
+        <p id="pHorario"></p>
+        <p><a id="pTelefono" href="#"></a> · <a id="pCorreo" href="#"></a></p>
+      </div>
+    </div>
+    <div class="pie-base">
+      <span>© <span id="anioActual">2026</span> PidaPues. Todos los derechos reservados.</span>
+      <span class="pie-staff">
+        Acceso del personal:
+        <a href="cocina.html">👨‍🍳 Cocina</a> ·
+        <a href="mesero.html">🧑‍🍽️ Mesero</a> ·
+        <a href="admin.html">📊 Administración</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- botón de whatsapp -->
+  <a class="whatsapp-flotante" id="waFlotante" href="#" target="_blank" rel="noopener" aria-label="Reservar por WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z"/><path class="wa-tel" d="M9.2 8.2c.3 2.6 2.9 5.2 5.6 5.600l1.200-1.200-2-1-.9.9c-.9-.4-1.700-1.200-2.100-2.100l.9-.9-1-2z"/></svg>
+  </a>
+
+  <script src="js/config-sitio.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/bienvenida.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Administración | PidaPues</title>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/menu.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+
+  <!-- ===================== ENCABEZADO ===================== -->
+  <header class="encabezado">
+    <a href="index.html" class="marca">
+      <img class="marca-logo" src="img/logo-compacto.png" alt="PidaPues" />
+    </a>
+    <span class="etiqueta-panel">📊 Administración</span>
+    <nav class="nav-staff">
+      <a href="index.html">🏠 Inicio</a>
+    </nav>
+  </header>
+
+  <!-- Aviso visible si falla la conexión con el servidor/base de datos -->
+  <div class="aviso-conexion" id="avisoConexion" role="alert" hidden>
+    ⚠️ No se pudo conectar con el servidor.
+    <span class="aviso-conexion-detalle" id="avisoConexionDetalle"></span>
+    Reintentando…
+  </div>
+
+  <div class="contenedor-admin">
+
+    <div class="titulo-seccion">
+      <h1>Panel administrativo</h1>
+      <p>Ventas, reportes, inventario, tiempos de servicio, mesas e historial de transacciones</p>
+    </div>
+
+    <!-- RF008: Reporte de ventas -->
+    <section class="tarjetas-resumen" id="tarjetasResumen" aria-label="Resumen de ventas del día"></section>
+
+    <!-- Reportes de ventas e inventario (gráficos y descargas) -->
+    <section class="bloque" id="seccionReportes">
+      <div class="bloque-encabezado">
+        <h2>Reportes de ventas e inventario</h2>
+      </div>
+
+      <div class="reportes-controles">
+        <label>Desde <input type="date" id="reporteDesde" /></label>
+        <label>Hasta <input type="date" id="reporteHasta" /></label>
+        <button class="btn-reporte principal" id="btnActualizarReportes">Actualizar</button>
+        <span class="reportes-separador"></span>
+        <button class="btn-reporte" id="btnPdf" disabled>⬇️ PDF con gráficos</button>
+        <button class="btn-reporte" id="btnCsvVentas">⬇️ CSV ventas</button>
+        <button class="btn-reporte" id="btnCsvInventario">⬇️ CSV inventario</button>
+      </div>
+      <p class="reportes-mensaje" id="reportesMensaje" hidden></p>
+
+      <div class="tarjetas-resumen" id="reportesResumen"></div>
+
+      <div class="reportes-grilla">
+        <div class="reporte-grafico ancho"><canvas id="graficoVentasDia"></canvas></div>
+        <div class="reporte-grafico"><canvas id="graficoMetodoPago"></canvas></div>
+        <div class="reporte-grafico"><canvas id="graficoTopProductos"></canvas></div>
+      </div>
+
+      <h3 class="subtitulo-reporte">Productos vendidos en el período</h3>
+      <div class="tabla-envoltorio">
+        <table class="tabla" id="tablaProductosVendidos">
+          <thead><tr><th>Producto</th><th>Categoría</th><th>Unidades</th><th>Ingresos</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="tabla-vacia" id="productosVendidosVacio" hidden>No hay ventas en este período.</p>
+
+      <h3 class="subtitulo-reporte">Inventario</h3>
+      <div class="reportes-grilla">
+        <div class="reporte-grafico ancho"><canvas id="graficoInventario"></canvas></div>
+      </div>
+      <div class="tabla-envoltorio">
+        <table class="tabla" id="tablaInventario">
+          <thead><tr><th>Producto</th><th>Categoría</th><th>Stock actual</th><th>Stock mínimo</th><th>Vendidas (período)</th><th>Estado</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- RF011: Estado de mesas -->
+    <section class="bloque">
+      <h2>Estado de las mesas</h2>
+      <div class="grilla-mesas" id="grillaMesas"></div>
+    </section>
+
+    <!-- RF010: Historial de pedidos y pagos -->
+    <section class="bloque">
+      <div class="bloque-encabezado">
+        <h2>Historial de pedidos y pagos</h2>
+        <button class="btn-reiniciar" id="btnReiniciarDemo">Reiniciar datos de demo</button>
+      </div>
+      <div class="tabla-envoltorio">
+        <table class="tabla" id="tablaHistorial">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Mesa</th>
+              <th>Productos</th>
+              <th>Total</th>
+              <th>Método de pago</th>
+              <th>Estado</th>
+              <th>Fecha y hora</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="tabla-vacia" id="historialVacio" hidden>Todavía no se han registrado pedidos.</p>
+    </section>
+
+    <!-- RF009: Tiempos de servicio -->
+    <section class="bloque">
+      <h2>Tiempos de servicio</h2>
+      <div class="tabla-envoltorio">
+        <table class="tabla" id="tablaTiempos">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Registro</th>
+              <th>Inicio preparación</th>
+              <th>Listo</th>
+              <th>Entregado</th>
+              <th>Duración total</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="tabla-vacia" id="tiemposVacio" hidden>Todavía no hay pedidos finalizados.</p>
+    </section>
+
+  </div>
+
+  <script src="/vendor/chart.js"></script>
+  <script src="/vendor/jspdf.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/reportes.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
