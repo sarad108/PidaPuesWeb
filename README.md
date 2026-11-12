@@ -214,15 +214,5 @@ Los controladores exponen diferentes rutas de la API. Algunos ejemplos encontrad
 | `ResenaController` | Según sus rutas definidas | Gestionar reseñas. |
 | `SaludController` | `/api/salud` | Consultar el estado del sistema. |
 
-## 10. Consideraciones de seguridad
-
-- No compartir ni subir el archivo `.env`.
-- No publicar contraseñas de MySQL, PIN ni credenciales de correo.
-- Cambiar los valores de ejemplo antes de utilizar el sistema fuera de un entorno de pruebas.
-- El archivo `.gitignore` excluye `.env`, pero también se debe comprobar que no haya sido incluido previamente en el historial de Git.
-- La configuración y los mecanismos de seguridad deben revisarse antes de desplegar el sistema en producción.
-
----
-
 **PidaPues**  
 Sistema web para la gestión digital de pedidos en restaurantes.
